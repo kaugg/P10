@@ -11,11 +11,16 @@ uniform vec3 lightNormal;
 // Pass in things from Processing with shader.set("variable_name", value);
 // Then declare them here with: uniform float variable_name;
 
+uniform float mx;
+uniform float my;
+
 uniform float myTime;
 uniform bool ctr_animate;
 uniform bool ctr_discard;
 uniform bool ctr_pulsate;
 uniform bool ctr_rainbow;
+
+uniform bool ctr_mouse1;
 
 // Come from the geometry/material of the object
 attribute vec4 vertex;
@@ -56,6 +61,13 @@ void main() {
 	vert.z = vert.z-50*(sin(myTime*2));
 	vert.y = vert.y;  
   }	
+	
+   if(ctr_discard) // discard vertices
+  {
+	  //vert.x = vert.x-sin(myTime)*100;
+	  //vert.z = vert.y;
+	  //vert.y = vert.z; 
+  }
 	
 	
   // think of gl_Position as a return value for vertex shaders
