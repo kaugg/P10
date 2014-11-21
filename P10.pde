@@ -12,6 +12,13 @@ boolean rainbow = false;    // toggle rainbow coloring
 boolean discard = false;    // toggle discarding vertices
 boolean pulsate = false;    // toggle a pulsating animation and color glow
 
+boolean discard_1 = false;
+boolean discard_2 = false;
+boolean discard_3 = false;
+
+boolean mouse_1 = false;
+
+
 boolean play = true;  // star running the time counter
 
 void setup() {
@@ -34,11 +41,20 @@ void draw() {
     ballShader.set("myTime",timeX); // send time to shader
   }
   
+  ballShader.set("mx",mouseX); // send time to shader
+  ballShader.set("my",mouseY); // send time to shader
+  
   // Send controls to vertex shader
   ballShader.set("ctr_animate",animate);  // turn on animation for shader
   ballShader.set("ctr_rainbow",rainbow);  // turn on rainbow for shader
   ballShader.set("ctr_pulsate",pulsate);  // turn on pulsate for shader
   ballShader.set("ctr_discard",discard);  // turn on discard for shader
+  
+  ballShader.set("ctr_discard1",discard_1);  // turn on discard for shader
+  ballShader.set("ctr_discard2",discard_2);  // turn on discard for shader
+  ballShader.set("ctr_discard3",discard_3);  // turn on discard for shader
+  
+  ballShader.set("ctr_mouse1",mouse_1);  // turn on mouse color effect
   
       
   background(0); 
@@ -110,4 +126,10 @@ void keys() {
   if (key=='1') {animate = true; rainbow = true; hideShpere= true;}  // combination key 1
   if (key=='2') {pulsate = true; discard = true; hideShpere= true;}  // combination key 2
   if (key=='x') {pulsate = false; discard = false; animate = false; rainbow = false; hideShpere= false;}  // reset all effects
+  
+  if (key=='j') {discard_1=!discard_1;}  // discard vertices mode 1  [color]
+  if (key=='k') {discard_2=!discard_2;}  // discard vertices mode 1  [color]
+  if (key=='l') {discard_3=!discard_3;}  // discard vertices mode 1  [color]
+  
+  if (key=='m') {mouse_1=!mouse_1;}  // discard vertices mode 1  [color]
 }

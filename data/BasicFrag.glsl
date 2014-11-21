@@ -13,12 +13,20 @@ precision mediump int;
 // Pass in things from Processing with shader.set("variable_name", value);
 // Then declare them here with: uniform float variable_name;
 
+uniform float mx;
+uniform float my;
+
 uniform float myTime;
 uniform bool ctr_animate;
 uniform bool ctr_discard;
 uniform bool ctr_pulsate;
 uniform bool ctr_rainbow;
 
+uniform bool ctr_discard1;
+uniform bool ctr_discard2;
+uniform bool ctr_discard3;
+
+uniform bool ctr_mouse1;
 
 // These values come from the vertex shader
 varying vec4 vertColor;
@@ -54,26 +62,34 @@ void main() {
   if(ctr_discard) // discard vertices
   {
 	  // MODE 1
-	  //if(cos(vertPos.x*0.3)*cos(vertPos.x*0.3) > sin(vertPos.y*0.3)*sin(vertPos.y*0.3) )
-	  //{
-      //discard;
-	  //}
-	  
-	  // MODE 2
-	  //if(cos(vertPos.z*0.3)*cos(vertPos.x*0.3) > sin(vertPos.x*0.3)*sin(vertPos.y*0.3) )
-	  //{
-      //discard;
-	  //}
-	  
-	  // MODE 3
-	  if(cos(vertPos.z*0.3)*cos(vertPos.z*0.3) > sin(vertPos.x*0.3)*sin(vertPos.y*0.3) )
+	  if( (cos(vertPos.x*0.3)*cos(vertPos.x*0.3) > sin(vertPos.y*0.3)*sin(vertPos.y*0.3)) &&
+			(ctr_discard1))
 	  {
       discard;
 	  }
 	  
+	  // MODE 2
+	  if((cos(vertPos.z*0.3)*cos(vertPos.x*0.3) > sin(vertPos.x*0.3)*sin(vertPos.y*0.3)) &&
+			(ctr_discard2))
+	  {
+        discard;
+	  }  
+	  
+	  // MODE 3
+	  if((cos(vertPos.z*0.3)*cos(vertPos.z*0.3) > sin(vertPos.x*0.3)*sin(vertPos.y*0.3)) &&
+			(ctr_discard3))
+	  {
+        discard;
+	  }
+	  
   }
   
-  
+  if(ctr_mouse1)
+  {
+		color.r = mx/my;
+		color.g = 0.2;
+		color.b = 0.8;
+  }
   
   
   // The "return value" of a fragment shader
