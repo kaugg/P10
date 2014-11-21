@@ -53,12 +53,25 @@ void main() {
   
   if(ctr_discard) // discard vertices
   {
-	  if(vertPos.x > vertPos.y )
+	  // MODE 1
+	  //if(cos(vertPos.x*0.3)*cos(vertPos.x*0.3) > sin(vertPos.y*0.3)*sin(vertPos.y*0.3) )
+	  //{
+      //discard;
+	  //}
+	  
+	  // MODE 2
+	  //if(cos(vertPos.z*0.3)*cos(vertPos.x*0.3) > sin(vertPos.x*0.3)*sin(vertPos.y*0.3) )
+	  //{
+      //discard;
+	  //}
+	  
+	  // MODE 3
+	  if(cos(vertPos.z*0.3)*cos(vertPos.z*0.3) > sin(vertPos.x*0.3)*sin(vertPos.y*0.3) )
 	  {
-		discard;
+      discard;
 	  }
+	  
   }
-  
   
   
   

@@ -67,7 +67,23 @@ void draw() {
   
   // Sphere
   shader(ballShader); // replace resetShader() with a call to use your own shader
-  fill(#BBBBFF);
+  
+  if(pulsate)
+  {
+    fill(#22FFAA);
+  }
+  else if(animate)
+  {
+    fill(#FF2233);
+  }
+  else if(discard)
+  {
+    fill(#ffce00);
+  }
+  else
+  {
+    fill(#BBBBFF);
+  }
   
   if( hideShpere )
   {
