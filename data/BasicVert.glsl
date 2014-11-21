@@ -49,6 +49,14 @@ void main() {
   }	
 	
 	
+  if(ctr_pulsate) // enable pulsate
+  {
+    // This animates the ball
+	vert.x = vert.x;
+	vert.z = vert.z-50*(sin(myTime*2));
+	vert.y = vert.y;  
+  }	
+	
 	
   // think of gl_Position as a return value for vertex shaders
   gl_Position = transform * vert; 

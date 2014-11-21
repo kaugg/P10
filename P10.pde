@@ -67,7 +67,7 @@ void draw() {
   
   // Sphere
   shader(ballShader); // replace resetShader() with a call to use your own shader
-  fill(#EEEEFF);
+  fill(#BBBBFF);
   
   if( hideShpere )
   {
@@ -75,7 +75,7 @@ void draw() {
   }
   else
   {
-    stroke(#DD0000);
+    stroke(#CCCCFF);
   }
   
   sphereDetail(32);
@@ -91,6 +91,7 @@ void keys() {
   if (key=='d') {discard=!discard;}  // discard vertices  [color]
   if (key=='f') {pulsate=!pulsate;}  // pulsate, & use mouse movement [motion 2]
   if (key=='p') {play=!play;}  // pause and start time
-  if (key=='1') {}  // combination key 1
-  if (key=='2') {}  // combination key 2
+  if (key=='1') {animate = true; rainbow = true; hideShpere= true;}  // combination key 1
+  if (key=='2') {pulsate = true; discard = true; hideShpere= true;}  // combination key 2
+  if (key=='x') {pulsate = false; discard = false; animate = false; rainbow = false; hideShpere= false;}  // reset all effects
 }

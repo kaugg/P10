@@ -53,12 +53,7 @@ void main() {
   
   if(ctr_discard) // discard vertices
   {
-	  if(vertNormal.x > vertNormal.y)
-	  {
-		discard;
-	  }
-
-	   if(vertNormal.z > vertNormal.y)
+	  if(vertPos.x > vertPos.y )
 	  {
 		discard;
 	  }
