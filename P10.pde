@@ -1,3 +1,5 @@
+// KEMBLE HILDRETH
+
 PShader catShader;
 PShader ballShader;
 PImage catTexture;
@@ -18,6 +20,11 @@ boolean discard_3 = false;
 
 boolean mouse_1 = false;
 
+boolean animate_discard = false;
+
+boolean waves = false;
+
+boolean color_cycle = false;
 
 boolean play = true;  // star running the time counter
 
@@ -55,8 +62,11 @@ void draw() {
   ballShader.set("ctr_discard3",discard_3);  // turn on discard for shader
   
   ballShader.set("ctr_mouse1",mouse_1);  // turn on mouse color effect
-  
-      
+  ballShader.set("ctr_animate_discard",animate_discard);  // allow for discarded vertices to be animated
+  ballShader.set("ctr_waves",waves);  // allow for discarded vertices to be animated
+  ballShader.set("ctr_color_cycle",color_cycle);  // allow for discarded vertices to be animated
+    
+       
   background(0); 
   float dirY = (mouseY / float(height) - 0.5) * 2;
   float dirX = (mouseX / float(width) - 0.5) * 2;
@@ -96,6 +106,10 @@ void draw() {
   {
     fill(#ffce00);
   }
+  else if(waves)
+  {
+    fill(#1166ff);
+  }
   else
   {
     fill(#BBBBFF);
@@ -123,13 +137,16 @@ void keys() {
   if (key=='d') {discard=!discard;}  // discard vertices  [color]
   if (key=='f') {pulsate=!pulsate;}  // pulsate, & use mouse movement [motion 2]
   if (key=='p') {play=!play;}  // pause and start time
-  if (key=='1') {animate = true; rainbow = true; hideShpere= true;}  // combination key 1
-  if (key=='2') {pulsate = true; discard = true; hideShpere= true;}  // combination key 2
-  if (key=='x') {pulsate = false; discard = false; animate = false; rainbow = false; hideShpere= false;}  // reset all effects
+  if (key=='1') {waves = true; hideShpere= true; animate = true; discard = true; discard_1 = true;}  // combination key 1
+  if (key=='2') {pulsate = true; discard = true; discard_3 = true; animate_discard=false; rainbow=true;  hideShpere= true;}  // combination key 2
+  if (key=='x') {pulsate = false; discard = false; animate = false; rainbow = false; hideShpere= false; animate_discard=false; waves=false;}  // reset all effects
   
   if (key=='j') {discard_1=!discard_1;}  // discard vertices mode 1  [color]
   if (key=='k') {discard_2=!discard_2;}  // discard vertices mode 1  [color]
   if (key=='l') {discard_3=!discard_3;}  // discard vertices mode 1  [color]
   
   if (key=='m') {mouse_1=!mouse_1;}  // discard vertices mode 1  [color]
+  if (key==';') {animate_discard=!animate_discard;}  // animate discard vertices
+  if (key=='w') {waves=!waves;}  // animate waves
+  if (key=='c') {color_cycle=!color_cycle;}  // animate waves
 }

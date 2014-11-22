@@ -1,6 +1,7 @@
 // Fragment shader
 // The fragment shader is run once for every /pixel/ (not vertex!)
 // It can change the color and transparency of the fragment.
+// KEMBLE HILDRETH
 
 #ifdef GL_ES
 precision mediump float;
@@ -28,6 +29,12 @@ uniform bool ctr_discard3;
 
 uniform bool ctr_mouse1;
 
+uniform bool ctr_animate_discard = false;
+
+uniform bool ctr_waves;
+
+uniform bool ctr_color_cycle;
+
 // These values come from the vertex shader
 varying vec4 vertColor;
 varying vec3 vertNormal;
@@ -36,6 +43,7 @@ varying vec4 vertPos;
 
 void main() {  
   float intensity;
+  float time_cos;
   
   // vec4 because RGBA
   vec4 color;
@@ -48,7 +56,29 @@ void main() {
   //color.r *= 0.5; // make it kind of cyan by decreasing red,
                   // just as an example. feel free to change
                   // this.
-				  
+			
+
+
+	if(ctr_animate_discard)
+	{
+		time_cos = cos(myTime);
+	}
+	else
+	{
+		time_cos = 1;
+	}
+
+	if(ctr_waves)
+	{
+		color.a = 0.9;
+	}
+	
+	if(ctr_color_cycle)
+	{
+		color.r = cos(myTime/640);
+		color.g = cos(myTime/640);
+		color.b = cos(myTime/640);
+	}
 				  
 	if(ctr_rainbow) // make colors rainbow
 	{		
@@ -62,21 +92,21 @@ void main() {
   if(ctr_discard) // discard vertices
   {
 	  // MODE 1
-	  if( (cos(vertPos.x*0.3)*cos(vertPos.x*0.3) > sin(vertPos.y*0.3)*sin(vertPos.y*0.3)) &&
+	  if( (cos(vertPos.x*0.3)*cos(vertPos.x*0.3) > sin(vertPos.y*0.3)*sin(vertPos.y*0.3)*time_cos) &&
 			(ctr_discard1))
 	  {
       discard;
 	  }
 	  
 	  // MODE 2
-	  if((cos(vertPos.z*0.3)*cos(vertPos.x*0.3) > sin(vertPos.x*0.3)*sin(vertPos.y*0.3)) &&
+	  if((cos(vertPos.z*0.3)*cos(vertPos.x*0.3)*time_cos > sin(vertPos.x*0.3)*sin(vertPos.y*0.3)) &&
 			(ctr_discard2))
 	  {
         discard;
 	  }  
 	  
 	  // MODE 3
-	  if((cos(vertPos.z*0.3)*cos(vertPos.z*0.3) > sin(vertPos.x*0.3)*sin(vertPos.y*0.3)) &&
+	  if((cos(vertPos.z*0.3)*cos(vertPos.z*0.3)*time_cos > sin(vertPos.x*0.3)*sin(vertPos.y*0.3)) &&
 			(ctr_discard3))
 	  {
         discard;

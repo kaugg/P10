@@ -1,6 +1,7 @@
 // Vertex shader
 // The vertex shader is run once for every /vertex/ (not pixel)!
 // It can change the (x,y,z) of the vertex, as well as its normal for lighting.
+// KEMBLE HILDRETH
 
 // Set automatically by Processing
 uniform mat4 transform;
@@ -21,6 +22,9 @@ uniform bool ctr_pulsate;
 uniform bool ctr_rainbow;
 
 uniform bool ctr_mouse1;
+
+uniform bool ctr_waves;
+
 
 // Come from the geometry/material of the object
 attribute vec4 vertex;
@@ -53,6 +57,13 @@ void main() {
 	vert.y = vert.y/(cos(myTime/2));  
   }	
 	
+  if(ctr_waves) // enable waves
+  {
+    // This animates the ball
+	vert.x = vert.x + 10*cos(myTime)*sin(vert.y);
+	//vert.y = vert.y + 10*cos(myTime)*sin(vert.y);  
+	//vert.z = vert.z + 10*cos(myTime)*sin(vert.x);  
+  }	
 	
   if(ctr_pulsate) // enable pulsate
   {
